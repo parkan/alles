@@ -32,15 +32,15 @@ check-and-reinit-submodules:
 	fi
 
 %.o: %.c $(HEADERS) check-and-reinit-submodules
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -ldl
 
 %.o: %.mm $(HEADERS) check-and-reinit-submodules
-	clang $(CFLAGS) -c $< -o $@
+	clang $(CFLAGS) -c $< -o $@ -ldl
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS) check-and-reinit-submodules
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@ -ldl
 
 clean:
 	-rm -f *.o
